@@ -52,8 +52,19 @@ public class ShootManager : MonoBehaviour {
         return false;
     }
     void Shot()
-    {
-        Instantiate(Shots[typeOfShot], player.position, Quaternion.identity);
+    {   if(typeOfShot != 3)
+        {
+            Instantiate(Shots[typeOfShot], player.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(Shots[3], new Vector2(player.position.x + .5f, player.position.y + 1),
+                Quaternion.Euler(new Vector3(0, 0, -5)));
+            Instantiate(Shots[3], new Vector2(player.position.x, player.position.y + 1),
+               Quaternion.identity);
+            Instantiate(Shots[3], new Vector2(player.position.x - .5f, player.position.y + 1),
+               Quaternion.Euler(new Vector3(0, 0, 5)));
+        }
         numberOfShots++;
     }
 

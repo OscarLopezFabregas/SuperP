@@ -84,7 +84,7 @@ public class Player : MonoBehaviour {
                 
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Left")
         {
@@ -95,7 +95,8 @@ public class Player : MonoBehaviour {
             rightWall = true;
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Left")
         {
@@ -106,4 +107,5 @@ public class Player : MonoBehaviour {
             rightWall = false;
         }
     }
+   
 }
