@@ -1,23 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class PressStart : MonoBehaviour {
 
-    public GameObject pressStart;
+    public Text pressStart;
     float time;
-
-	
-	void Update ()
+    Color transparent;
+    private void Start()
     {
-        time += Time.deltaTime;
+        transparent = new Color(1, 1, 1, 0);
+    }
+
+    void Update ()
+    {
+        time += Time.deltaTime*3;
 
         if(Mathf.RoundToInt(time)%2 == 0)
         {
-            pressStart.SetActive(true);
+            pressStart.color = Color.yellow;
         }
         else
         {
-            pressStart.SetActive(false);
+            pressStart.color = transparent;
         }
     }
 
