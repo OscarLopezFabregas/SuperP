@@ -102,13 +102,13 @@ public class Ball : MonoBehaviour {
 
     public void SlowBall()
     {
-        rb.velocity /= 4f;
-        rb.gravityScale = 0.25f;
+        rb.velocity /= 1.4f;
+        rb.gravityScale = 0.5f;
      
     }
     public void NormalSpeedBall()
     {
-        rb.velocity *= 4;
+        rb.velocity *= 2;
         rb.gravityScale = 1f;
 
     }
