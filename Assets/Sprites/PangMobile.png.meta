@@ -33,7 +33,7 @@ TextureImporter:
     21300052: TimeSlow
     21300054: Life
     21300056: TimeStop
-    21300058: PangMobile_29
+    21300058: TimeSlow
     21300060: PangMobile_30
     21300062: PangMobile_31
     21300064: Fruit1
@@ -50,9 +50,9 @@ TextureImporter:
     21300086: Fruit_12
     21300088: Fruit_13
     21300090: Fruit_14
-    21300092: PangMobile_46
-    21300094: PangMobile_47
-    21300096: PangMobile_48
+    21300092: Fruit_12
+    21300094: Fruit_13
+    21300096: Fruit_14
     21300098: PangMobile_49
     21300100: PangMobile_50
     21300102: PangMobile_51
@@ -70,18 +70,20 @@ TextureImporter:
     21300126: PangMobile_32
     21300128: PangMobile_33
     21300130: PangMobile_34
-    21300132: PangMobile_35
-    21300134: PangMobile_36
-    21300136: PangMobile_37
-    21300138: PangMobile_38
-    21300140: PangMobile_39
-    21300142: PangMobile_40
-    21300144: PangMobile_41
+    21300132: Fruit_1
+    21300134: Fruit_2
+    21300136: Fruit_3
+    21300138: Fruit_4
+    21300140: Fruit_5
+    21300142: Fruit_6
+    21300144: Fruit_7
     21300146: PangMobile_42
     21300148: PangMobile_43
     21300150: PangMobile_44
     21300152: PangMobile_45
     21300154: PangMobile_52
+    21300156: Fruit_8
+    21300158: Fruit_9
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -594,7 +596,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_29
+      name: TimeSlow
       rect:
         serializedVersion: 2
         x: 219
@@ -678,7 +680,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_35
+      name: Fruit_1
       rect:
         serializedVersion: 2
         x: 9
@@ -692,7 +694,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_36
+      name: Fruit_2
       rect:
         serializedVersion: 2
         x: 34
@@ -706,7 +708,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_37
+      name: Fruit_3
       rect:
         serializedVersion: 2
         x: 59
@@ -720,7 +722,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_38
+      name: Fruit_4
       rect:
         serializedVersion: 2
         x: 84
@@ -734,7 +736,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_39
+      name: Fruit_5
       rect:
         serializedVersion: 2
         x: 109
@@ -748,7 +750,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_40
+      name: Fruit_6
       rect:
         serializedVersion: 2
         x: 134
@@ -762,7 +764,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_41
+      name: Fruit_7
       rect:
         serializedVersion: 2
         x: 159
@@ -776,7 +778,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_42
+      name: Fruit_8
       rect:
         serializedVersion: 2
         x: 184
@@ -790,7 +792,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_43
+      name: Fruit_9
       rect:
         serializedVersion: 2
         x: 209
@@ -804,7 +806,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_44
+      name: Fruit_10
       rect:
         serializedVersion: 2
         x: 234
@@ -818,11 +820,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_45
+      name: Fruit_11
       rect:
         serializedVersion: 2
-        x: 259
-        y: 60
+        x: 258
+        y: 61
         width: 20
         height: 19
       alignment: 7
@@ -832,7 +834,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_46
+      name: Fruit_12
       rect:
         serializedVersion: 2
         x: 284
@@ -846,7 +848,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_47
+      name: Fruit_13
       rect:
         serializedVersion: 2
         x: 309
@@ -860,7 +862,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_48
+      name: Fruit_14
       rect:
         serializedVersion: 2
         x: 334

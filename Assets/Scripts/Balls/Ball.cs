@@ -99,4 +99,40 @@ public class Ball : MonoBehaviour {
             }
         }
     }
+
+    public void SlowBall()
+    {
+        rb.velocity /= 4f;
+        rb.gravityScale = 0.25f;
+     
+    }
+    public void NormalSpeedBall()
+    {
+        rb.velocity *= 4;
+        rb.gravityScale = 1f;
+
+    }
+
+    //public IEnumerator WaitToBlink(params GameObject[] balls)
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    foreach (GameObject item in balls)
+    //    {
+    //        StartCoroutine(Blinking(item));
+    //    }
+
+    //}
+
+    //public IEnumerator Blinking(GameObject item)
+    //{
+
+    //    for(float i =0 ; i < 1f; i += Time.deltaTime)
+    //    {
+    //        item.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+    //        yield return new WaitForSeconds(0.2f);
+    //        item.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+    //        yield return new WaitForSeconds(0.2f);
+    //    }
+    //}  
+
 }

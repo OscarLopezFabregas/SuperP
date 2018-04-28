@@ -51,6 +51,7 @@ public class FreezeManager : MonoBehaviour {
             if(item!=null)
             {
                 item.GetComponent<Ball>().FreezeBall(item);
+               // StartCoroutine(item.GetComponent<Ball>().WaitToBlink(item));
             }
         }
             
@@ -60,25 +61,32 @@ public class FreezeManager : MonoBehaviour {
 
         while(freezeTime>0)
         {
-            freezeTime -= Time.deltaTime;
+            
             freezeTimeText.text = freezeTime.ToString("f2");
-
+            freezeTime -= Time.deltaTime;
             yield return null;
         }
-
+            
         freezeTimeCount.SetActive(false);
         freezeTime = 0f;
+        
 
         foreach (GameObject item in BallManager.bm.balls)
         {
             if(item!=null)
             {
                 item.GetComponent<Ball>().UnfreezeBall(item);
+                
             }
           
         }
 
         freeze = false;
     }
+
+ 
+
+
+ 
 }
 

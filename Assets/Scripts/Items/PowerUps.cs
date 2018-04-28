@@ -37,6 +37,7 @@ public class PowerUps : MonoBehaviour {
         {
             transform.position += Vector3.down * Time.deltaTime * 2;
         }
+      
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,7 +47,7 @@ public class PowerUps : MonoBehaviour {
         
             inGround = true;
             StartCoroutine(WaitToBlink());
-            Destroy(gameObject, 25f);
+            Destroy(gameObject, 15f);
         }
 
         if(collision.gameObject.tag == "Player")
@@ -67,7 +68,10 @@ public class PowerUps : MonoBehaviour {
             {
                FreezeManager.fm.StartFreeze();
             }
-
+            else if (gameObject.name.Equals("TimeSlow"))
+            {
+                BallManager.bm.SlowTime();
+            }
             Destroy(gameObject);
         }
 
@@ -77,7 +81,7 @@ public class PowerUps : MonoBehaviour {
 
     IEnumerator WaitToBlink()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(10f);
 
         StartCoroutine(Blinking());
     }

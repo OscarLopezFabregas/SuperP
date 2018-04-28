@@ -73,6 +73,11 @@ public class BallManager : MonoBehaviour {
         StartCoroutine(DynamiteBH(maxNumberBalls));
     }
 
+    public void SlowTime()
+    {
+        StartCoroutine(TimeSlow());
+    }
+
     //Liada...
     List<GameObject> FindBalls(int typeOfBall)
     {
@@ -123,5 +128,31 @@ public class BallManager : MonoBehaviour {
 
         splitting = false;
        
+    }
+
+    public IEnumerator TimeSlow()
+    {
+        float time = 0;
+
+        foreach (GameObject item in balls)
+        {
+            if(item !=null)
+            {
+                item.GetComponent<Ball>().SlowBall();
+            }
+        }
+        while(time<3f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        foreach (GameObject item in balls)
+        {
+            if (item != null)
+            {
+                item.GetComponent<Ball>().NormalSpeedBall();
+            }
+        }
     }
 }
