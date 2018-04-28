@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Player : MonoBehaviour {
 
@@ -17,6 +18,10 @@ public class Player : MonoBehaviour {
     bool rightWall;
   
     bool leftWall;
+
+    public GameObject shield;
+
+    public bool blink;
 
     private void Awake()
     {
@@ -84,6 +89,26 @@ public class Player : MonoBehaviour {
                 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Ball")
+        {
+            if(shield.activeInHierarchy)
+            {
+                shield.SetActive(false);
+
+                StartCoroutine(Blinking());
+            }
+        }
+        else 
+        {
+          if((!blink))
+            {
+                //FINALIZAR PARTIDA
+            }
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Left")
@@ -108,4 +133,25 @@ public class Player : MonoBehaviour {
         }
     }
    
+    public IEnumerator Blinking()
+    {
+        blink = true;
+
+        for(int i = 0; i<8; i++)
+        {
+            if(blink)
+            {
+                sr.color = new Color(1,1,1,0);
+                yield return new WaitForSeconds(0.2f);
+                sr.color = new Color(1, 1, 1, 1);
+                yield return new WaitForSeconds(0.2f);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        blink = false;
+    }
 }
