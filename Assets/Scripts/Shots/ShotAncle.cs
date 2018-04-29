@@ -51,7 +51,13 @@ public class ShotAncle : MonoBehaviour {
             Destroy(gameObject);
             ShootManager.shm.DestroyShot();
         }
-        
+        if (collision.gameObject.tag == "Hexagon")
+        {
+            collision.gameObject.GetComponent<Hexagon>().Split();
+            Destroy(gameObject);
+            ShootManager.shm.DestroyShot();
+        }
+
     }
 
     IEnumerator DestroyAncle()

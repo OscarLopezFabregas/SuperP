@@ -8,7 +8,8 @@ public class BallManager : MonoBehaviour {
 
     public bool splitting;
 
-    
+    public List<GameObject> balls = new List<GameObject>();
+
     private void Awake()
     {
         if (bm == null)
@@ -19,24 +20,18 @@ public class BallManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+  
+
     }
-
-
-    public List<GameObject> balls = new List<GameObject>();
-	
-
+    
 	void Start ()
     {
         balls.AddRange(GameObject.FindGameObjectsWithTag("Ball"));
-        StartGame();
-        
+           
 	}
 	
 	
-	void Update () {
-		
-	}
-
     public void StartGame()
     {
         foreach(GameObject item in balls)
@@ -54,10 +49,19 @@ public class BallManager : MonoBehaviour {
         }
     }
 
+    public void LoseGame()
+    {
+        foreach(GameObject item in balls)
+        {
+            item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            item.GetComponent<Rigidbody2D>().isKinematic = true;
+        }
+    }
+
     public void DestroyBall(GameObject ball, GameObject ball1, GameObject ball2)
     {
-        Destroy(ball);
         balls.Remove(ball);
+        Destroy(ball);
         balls.Add(ball1);
         balls.Add(ball2);
     }
@@ -70,7 +74,7 @@ public class BallManager : MonoBehaviour {
 
     public void Dynamite(int maxNumberBalls)
     {
-        StartCoroutine(DynamiteBH(maxNumberBalls));
+        StartCoroutine(DynamiteB(maxNumberBalls));
     }
 
     public void SlowTime()
@@ -102,7 +106,7 @@ public class BallManager : MonoBehaviour {
                 
     }
 
-    public IEnumerator DynamiteBH(int maxNumberBalls)
+    public IEnumerator DynamiteB(int maxNumberBalls)
     {
         ReloadList();
 
@@ -133,7 +137,7 @@ public class BallManager : MonoBehaviour {
     public IEnumerator TimeSlow()
     {
         float time = 0;
-
+     
         foreach (GameObject item in balls)
         {
             if(item !=null)
@@ -155,4 +159,6 @@ public class BallManager : MonoBehaviour {
             }
         }
     }
+
+  
 }

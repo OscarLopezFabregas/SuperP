@@ -12,6 +12,8 @@ public class Ball : MonoBehaviour {
 
     public bool right;
 
+    public GameObject powerUp;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,18 +24,22 @@ public class Ball : MonoBehaviour {
     {
         if(nextBall!=null)
         {
+            InstantiatePrice();
+
             GameObject ball1 = Instantiate(nextBall, rb.position + Vector2.right / 4,
                 Quaternion.identity);
+            ball1.GetComponent<Ball>().right = true;
             GameObject ball2 = Instantiate(nextBall, rb.position + Vector2.left / 4,
                Quaternion.identity);
-            if(FreezeManager.fm.freeze == false)
+            ball2.GetComponent<Ball>().right = false;
+            if (FreezeManager.fm.freeze == false)
             {
                 ball1.GetComponent<Rigidbody2D>().isKinematic = false;
                 ball1.GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 5), ForceMode2D.Impulse);
-                ball1.GetComponent<Ball>().right = true;
+                
                 ball2.GetComponent<Rigidbody2D>().isKinematic = false;
                 ball2.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 5), ForceMode2D.Impulse);
-                ball2.GetComponent<Ball>().right = false;
+               
                 BallManager.bm.DestroyBall(gameObject, ball1, ball2);
             }
             else
@@ -108,9 +114,26 @@ public class Ball : MonoBehaviour {
     }
     public void NormalSpeedBall()
     {
-        rb.velocity *= 2;
+        if(rb.velocity.x<0)
+        {
+            rb.velocity = new Vector2(-2, rb.velocity.y);
+        }
+        else if (rb.velocity.x>0)
+        {
+            rb.velocity = new Vector2(2, rb.velocity.y);
+        }
         rb.gravityScale = 1f;
 
+    }
+
+    void InstantiatePrice()
+    {
+        int aleatory = GameManager.gm.AleatoryNumber();
+
+        if(aleatory == 1)
+        {
+            Instantiate(powerUp, transform.position, Quaternion.identity);
+        }
     }
 
     //public IEnumerator WaitToBlink(params GameObject[] balls)

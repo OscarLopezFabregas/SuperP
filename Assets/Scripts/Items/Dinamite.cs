@@ -33,6 +33,7 @@ public class Dinamite : MonoBehaviour {
             Destroy(gameObject);
 
             BallManager.bm.Dynamite(5);
+            HexagonManager.hm.Dynamite(5);
         }
 
 

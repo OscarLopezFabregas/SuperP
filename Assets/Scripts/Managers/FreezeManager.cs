@@ -44,9 +44,10 @@ public class FreezeManager : MonoBehaviour {
     public IEnumerator FreezeTime()
     {
         freezeTime = 3f;
+
         freeze = true;
 
-        foreach(GameObject item in BallManager.bm.balls)
+        foreach (GameObject item in BallManager.bm.balls)
         {
             if(item!=null)
             {
@@ -54,8 +55,17 @@ public class FreezeManager : MonoBehaviour {
                // StartCoroutine(item.GetComponent<Ball>().WaitToBlink(item));
             }
         }
-            
 
+        foreach (GameObject item in HexagonManager.hm.hexagons)
+        {
+            if (item != null)
+            {
+                item.GetComponent<Hexagon>().FreezeHexagon(item);
+                // StartCoroutine(item.GetComponent<Ball>().WaitToBlink(item));
+            }
+        }
+
+        
 
         freezeTimeCount.SetActive(true);
 
@@ -79,6 +89,15 @@ public class FreezeManager : MonoBehaviour {
                 
             }
           
+        }
+
+        foreach (GameObject item in HexagonManager.hm.hexagons)
+        {
+            if (item != null)
+            {
+                item.GetComponent<Hexagon>().UnfreezeHexagon(item);
+                // StartCoroutine(item.GetComponent<Ball>().WaitToBlink(item));
+            }
         }
 
         freeze = false;

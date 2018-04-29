@@ -12,6 +12,7 @@ public class Fruits : MonoBehaviour {
 
 	void Update ()
     {
+        //TODO: INSTATIATE FRUIT RANDOMLY
 	if(Input.GetKeyDown(KeyCode.F))
         {
             InstantiateFruit();
