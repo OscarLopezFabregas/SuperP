@@ -55,7 +55,6 @@ public class Hexagon : MonoBehaviour {
     {
         if (nextHexagon != null)
         {
-            Debug.Log("Dinamite Working");
             InstantiatePrice();
 
             GameObject hex1 = Instantiate(nextHexagon, rb.position + Vector2.right / 4,
