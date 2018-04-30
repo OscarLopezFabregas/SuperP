@@ -45,6 +45,7 @@ public class FruitItem : MonoBehaviour {
             int score = Random.Range(500, 1000);
             PopUpManager.pop.InstantiatePopUpText(transform.position, score);
             Destroy(gameObject);
+            ScoreManager.sm.Updatescore(score);
         }
     }
 

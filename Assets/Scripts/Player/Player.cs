@@ -103,33 +103,37 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ball" 
-            || collision.gameObject.tag == "Hexagon")
+        if(GameManager.inGame && !FreezeManager.fm.freeze)
         {
-            if(shield.activeInHierarchy)
+            if (collision.gameObject.tag == "Ball"
+           || collision.gameObject.tag == "Hexagon")
             {
-                shield.SetActive(false);
-
-                StartCoroutine(Blinking());
-            }
-            else
-            {
-                if ((!blink) && GameManager.inGame)   
+                if (shield.activeInHierarchy)
                 {
-                    //Sometimes Lose animation reproduce two times. 
-                   StartCoroutine(Lose());
+                    shield.SetActive(false);
+
+                    StartCoroutine(Blinking());
+                }
+                else
+                {
+                    if ((!blink))
+                    {
+                        //Sometimes Lose animation reproduce two times. 
+                        StartCoroutine(Lose());
+                    }
                 }
             }
-        }
 
-        if (!GameManager.inGame && (collision.gameObject.tag == "Right"
-            || collision.gameObject.tag == "Left"))
-        {
-            sr.flipX = !sr.flipX;
-            rb.velocity /= 3f;
-            rb.velocity *= -1f;
-            rb.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
+            if (!GameManager.inGame && (collision.gameObject.tag == "Right"
+                || collision.gameObject.tag == "Left"))
+            {
+                sr.flipX = !sr.flipX;
+                rb.velocity /= 3f;
+                rb.velocity *= -1f;
+                rb.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
+            }
         }
+       
        
     }
 
