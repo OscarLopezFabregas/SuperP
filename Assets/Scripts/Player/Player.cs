@@ -116,7 +116,8 @@ public class Player : MonoBehaviour {
             {
                 if ((!blink))
                 {
-                  //  StartCoroutine(Lose());
+                    //Sometimes Lose animation reproduce two times. 
+                   StartCoroutine(Lose());
                 }
             }
         }

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 
     Player player;
 
+    int time;
+
     private void Awake()
     {
         if(gm==null)
@@ -41,6 +43,12 @@ public class GameManager : MonoBehaviour {
             inGame = false;
 
             player.Win();
+        }
+
+         if(inGame)
+        {
+           // time -= Time.deltaTime;
+           // timeText.text = "TIME" + time.ToString("f0");
         }
 	}
 
