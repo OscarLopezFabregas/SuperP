@@ -14,6 +14,8 @@ public class ShootManager : MonoBehaviour {
 
     Animator animator;
 
+    CurrentShotImage shotImage;
+
     private void Awake()
     {
         if(shm == null)
@@ -26,6 +28,7 @@ public class ShootManager : MonoBehaviour {
         }
 
         player = FindObjectOfType<Player>().transform;
+        shotImage = FindObjectOfType<CurrentShotImage>();
     }
     
     private void Start()
@@ -90,15 +93,19 @@ public class ShootManager : MonoBehaviour {
             {
                 case 0:
                     maxShots = 1;
+                    shotImage.CurrentShot("");
                     break;
                 case 1:
                     maxShots = 2;
+                    shotImage.CurrentShot("Arrow");
                     break;
                 case 2:
                     maxShots = 1;
+                    shotImage.CurrentShot("Ancle");
                     break;
                 case 3:
                     maxShots = 15;
+                    shotImage.CurrentShot("Gun");
                     break;
 
             }

@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
     }
 
-   
+    
     public void Split()
     {
         if(nextBall!=null)
@@ -34,13 +34,14 @@ public class Ball : MonoBehaviour {
             ball2.GetComponent<Ball>().right = false;
             if (FreezeManager.fm.freeze == false)
             {
+                BallManager.bm.DestroyBall(gameObject, ball1, ball2);
+
                 ball1.GetComponent<Rigidbody2D>().isKinematic = false;
                 ball1.GetComponent<Rigidbody2D>().AddForce(new Vector2(2, 5), ForceMode2D.Impulse);
                 
                 ball2.GetComponent<Rigidbody2D>().isKinematic = false;
                 ball2.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2, 5), ForceMode2D.Impulse);
-               
-                BallManager.bm.DestroyBall(gameObject, ball1, ball2);
+                
             }
             else
             {
@@ -58,7 +59,13 @@ public class Ball : MonoBehaviour {
         {
             BallManager.bm.LastBall(gameObject);
         }
-        
+
+        int score = Random.Range(100, 301);
+
+        PopUpManager.pop.InstantiatePopUpText(gameObject.transform.position, score);
+
+        ScoreManager.sm.Updatescore(score);
+
     }
 
     public void StartForce(params GameObject[] balls)
@@ -85,7 +92,6 @@ public class Ball : MonoBehaviour {
         {
             if(item!=null)
             {
-             
                 currentVelocity = item.GetComponent<Rigidbody2D>().velocity;
                 item.GetComponent<Rigidbody2D>().isKinematic = true;
                 item.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -96,7 +102,8 @@ public class Ball : MonoBehaviour {
 
     public void UnfreezeBall(params GameObject[] balls)
     {
-         foreach(GameObject item in balls)
+
+        foreach (GameObject item in balls)
         {
             if(item!=null)
             {

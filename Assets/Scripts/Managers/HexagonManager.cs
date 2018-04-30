@@ -110,6 +110,20 @@ public class HexagonManager : MonoBehaviour {
 
     }
 
+    //Temporary bug fixing     //This is added to fix a bug realated to the GUN, easy to optimize!
+    private void FixedUpdate()
+    {
+        int cnt = hexagons.Count;
+
+        for (int i = 0; i<cnt; i++)
+        {
+            if(hexagons[i]== null)
+            {
+                ReloadList();
+            }
+        }
+    }
+
     public IEnumerator DynamiteH(int maxNumberHexagons)
     {
         ReloadList();

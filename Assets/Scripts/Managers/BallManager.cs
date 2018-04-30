@@ -98,12 +98,26 @@ public class BallManager : MonoBehaviour {
         return ballsToDestroy;
     }
 
-    void ReloadList()
+    public void ReloadList()
     {
         balls.Clear();
 
         balls.AddRange(GameObject.FindGameObjectsWithTag("Ball"));
                 
+    }
+
+
+    //This is added to fix a bug realated to the GUN, easy to optimize!
+    private void FixedUpdate()
+    {
+      
+        for (int i = 0; i < balls.Count; i++)
+        {
+            if (balls[i] == null)
+            {
+                ReloadList();
+            }
+        }
     }
 
     public IEnumerator DynamiteB(int maxNumberBalls)

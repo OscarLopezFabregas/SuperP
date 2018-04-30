@@ -114,7 +114,7 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                if ((!blink))
+                if ((!blink) && GameManager.inGame)   
                 {
                     //Sometimes Lose animation reproduce two times. 
                    StartCoroutine(Lose());
@@ -181,11 +181,16 @@ public class Player : MonoBehaviour {
 
     public IEnumerator Lose()
     {
+        //Consider testing more
+        //Perhaps needs to reload BallList;
+
         GameManager.inGame = false;
-        animator.SetBool("loose", true);
+      
 
         BallManager.bm.LoseGame();
         HexagonManager.hm.LoseGame();
+
+        animator.SetBool("loose", true);
 
         yield return new WaitForSeconds(1);
 

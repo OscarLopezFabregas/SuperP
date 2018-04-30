@@ -50,7 +50,7 @@ public class PowerUps : MonoBehaviour {
             Destroy(gameObject, 15f);
         }
 
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player"&& GameManager.inGame)
         {
             if (gameObject.name.Equals("DoubleArrow"))
             {

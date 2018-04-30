@@ -43,6 +43,8 @@ public class FreezeManager : MonoBehaviour {
 
     public IEnumerator FreezeTime()
     {
+        BallManager.bm.ReloadList();
+
         freezeTime = 3f;
 
         freeze = true;
@@ -79,14 +81,13 @@ public class FreezeManager : MonoBehaviour {
             
         freezeTimeCount.SetActive(false);
         freezeTime = 0f;
-        
 
+       
         foreach (GameObject item in BallManager.bm.balls)
         {
-            if(item!=null)
+            if (item != null)
             {
                 item.GetComponent<Ball>().UnfreezeBall(item);
-                
             }
           
         }
@@ -100,6 +101,7 @@ public class FreezeManager : MonoBehaviour {
             }
         }
 
+       
         freeze = false;
     }
 
