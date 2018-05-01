@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -101,6 +102,16 @@ public class Player : MonoBehaviour {
     {
         shield.SetActive(false);
         animator.SetBool("win", true);
+    }
+
+    private void OnBecameInvisible()
+    {
+        Invoke("ReloadLevel", 0.5f); 
+    }
+
+    void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
