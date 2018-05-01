@@ -23,13 +23,15 @@ public class Player : MonoBehaviour {
 
     public bool blink;
 
+    LifeManager lm;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        lm = FindObjectOfType<LifeManager>();
 
-       
     }
 
     void Start ()
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour {
 
             rb.MovePosition(rb.position + Vector2.right * movement * Time.fixedDeltaTime);
 
-            newX = Mathf.Clamp(transform.position.x, -8, 8);
+            newX = Mathf.Clamp(transform.position.x, -8f, 8f);
 
             transform.position = new Vector2(newX, transform.position.y);
         }     
@@ -103,7 +105,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(GameManager.inGame && !FreezeManager.fm.freeze)
+        if (GameManager.inGame && !FreezeManager.fm.freeze)
         {
             if (collision.gameObject.tag == "Ball"
            || collision.gameObject.tag == "Hexagon")
@@ -123,7 +125,7 @@ public class Player : MonoBehaviour {
                     }
                 }
             }
-
+        }
             if (!GameManager.inGame && (collision.gameObject.tag == "Right"
                 || collision.gameObject.tag == "Left"))
             {
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour {
                 rb.velocity *= -1f;
                 rb.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
             }
-        }
+        
        
        
     }
@@ -141,10 +143,12 @@ public class Player : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Left")
         {
+           
             leftWall = true;
         }
         else if (collision.gameObject.tag == "Right")
         {
+            
             rightWall = true;
         }
     }
@@ -193,6 +197,8 @@ public class Player : MonoBehaviour {
 
         BallManager.bm.LoseGame();
         HexagonManager.hm.LoseGame();
+
+        lm.LifeLose();
 
         animator.SetBool("loose", true);
 
