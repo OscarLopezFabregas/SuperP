@@ -10,12 +10,8 @@ public class Fruits : MonoBehaviour {
         Instantiate(fruitItem, transform.position, Quaternion.identity);
     }
 
-	void Update ()
+    void Update()
     {
-        //TODO: INSTATIATE FRUIT RANDOMLY
-	if(Input.GetKeyDown(KeyCode.F))
-        {
-            InstantiateFruit();
-        }
-	}
+
+    }
 }

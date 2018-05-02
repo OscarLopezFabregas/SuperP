@@ -46,6 +46,7 @@ public class FruitItem : MonoBehaviour {
             PopUpManager.pop.InstantiatePopUpText(transform.position, score);
             Destroy(gameObject);
             ScoreManager.sm.Updatescore(score);
+            GameManager.gm.fruitsCaught++;
         }
     }
 

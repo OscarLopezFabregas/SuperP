@@ -17,7 +17,14 @@ public class GameManager : MonoBehaviour {
 
     public Text timeText;
 
+    public GameObject panel;
+    PanelController panelController;
+
     LifeManager lm;
+    Fruits fruits;
+
+    public int ballsDestroyed = 0;
+    public int fruitsCaught;
 
     private void Awake()
     {
@@ -32,6 +39,7 @@ public class GameManager : MonoBehaviour {
 
         player = FindObjectOfType<Player>();
         lm = FindObjectOfType<LifeManager>();
+        fruits = FindObjectOfType<Fruits>();
     }
     
 	
@@ -50,6 +58,8 @@ public class GameManager : MonoBehaviour {
 
             player.Win();
             lm.LifeWin();
+            panel.SetActive(true);
+            panelController = panel.GetComponent<PanelController>();
         }
 
          if(inGame)
@@ -59,6 +69,15 @@ public class GameManager : MonoBehaviour {
         }
 	}
 
+    public void UpdateBallsDestroyed()
+    {
+        ballsDestroyed++;
+
+        if(ballsDestroyed%Random.Range(5,20)==0 && BallManager.bm.balls.Count >0)
+        {
+            fruits.InstantiateFruit();
+        }
+    }
    
     public IEnumerator GameStart()
     {

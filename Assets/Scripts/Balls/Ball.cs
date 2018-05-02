@@ -65,7 +65,8 @@ public class Ball : MonoBehaviour {
         PopUpManager.pop.InstantiatePopUpText(gameObject.transform.position, score);
 
         ScoreManager.sm.Updatescore(score);
-
+        //Consider Improving
+        GameManager.gm.UpdateBallsDestroyed();
     }
 
     public void StartForce(params GameObject[] balls)
