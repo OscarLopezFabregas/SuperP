@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour {
 
     Player player;
 
-    float time = 100f;
+    public float time = 100f;
 
     public Text timeText;
 
@@ -95,4 +96,10 @@ public class GameManager : MonoBehaviour {
     {
         return Random.Range(0, 3);
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }
