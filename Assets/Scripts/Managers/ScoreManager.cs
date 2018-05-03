@@ -10,6 +10,10 @@ public class ScoreManager : MonoBehaviour {
     public Text scoreText;
     public int currentScore = 0;
 
+    public Text highScoreText;
+    public int highScore = 500;
+
+
     private void Awake()
     {
         if (sm == null)
@@ -34,6 +38,12 @@ public class ScoreManager : MonoBehaviour {
     {
         currentScore += score;
         scoreText.text = currentScore.ToString();
+
+        if(currentScore > highScore)
+        {
+            highScore = currentScore;
+            highScoreText.text = "HI - " + highScore.ToString();
+         }
     }
 
 	void Update () {
