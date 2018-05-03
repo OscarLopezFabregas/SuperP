@@ -19,20 +19,20 @@ public class LifeManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	public void UpdateLifes (int life) {
-
-        if(life > 0)
-        {
-            lifes += life;
-        }
-        else
-        {
-            lifes -= life;
-        }
-
-        lifesText.text = "X " + lifes.ToString();
-
+	public void UpdateLifes ()
+    {
+        lifesText.text = lifes.ToString();
 	}
+    public void AddLifes()
+    {
+        lifes++;
+        UpdateLifes();
+    }
+    public void SubtractLifes()
+    {
+        lifes--;
+        UpdateLifes();
+    }
 
     public void LifeWin()
     {
@@ -42,6 +42,13 @@ public class LifeManager : MonoBehaviour {
     public void LifeLose()
     {
         animator.SetBool("lose", true);
+    }
+
+    public void RestartLifesDoll()
+    {
+        animator.SetBool("win", false);
+        
+        animator.SetBool("lose", false);
     }
 
 }

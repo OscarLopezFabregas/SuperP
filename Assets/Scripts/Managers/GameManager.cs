@@ -1,8 +1,18 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System;
+
+public enum SaveType
+{
+    HIGHSCORE,
+    LIFES
+
+};
+
 
 public class GameManager : MonoBehaviour {
 
@@ -27,9 +37,13 @@ public class GameManager : MonoBehaviour {
     public int ballsDestroyed = 0;
     public int fruitsCaught;
 
+    string rutaArchivo;
+       
     private void Awake()
     {
-        if(gm==null)
+        rutaArchivo = Application.persistentDataPath + "/datos.dat";
+
+        if (gm==null)
         {
             gm = this;
         }
@@ -46,6 +60,7 @@ public class GameManager : MonoBehaviour {
 	
 	void Start ()
     {
+        Cargar();
         StartCoroutine(GameStart());
 	}
 	
@@ -74,7 +89,7 @@ public class GameManager : MonoBehaviour {
     {
         ballsDestroyed++;
 
-        if(ballsDestroyed%Random.Range(5,20)==0 && BallManager.bm.balls.Count >0)
+        if(ballsDestroyed % UnityEngine.Random.Range(5,20)==0 && BallManager.bm.balls.Count >0)
         {
             fruits.InstantiateFruit();
         }
@@ -94,7 +109,7 @@ public class GameManager : MonoBehaviour {
 
     public int AleatoryNumber()
     {
-        return Random.Range(0, 3);
+        return UnityEngine.Random.Range(0, 3);
     }
 
     public void NextLevel()
@@ -102,4 +117,64 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Guardar(SaveType type, int data)
+    {
+        //Consider modifying this function so it can be called from everywhere in the game
+       // Debug.Log("Saving data: \n" + "highscore: " + data );
+        
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(rutaArchivo);
+        DatosAGuardar datos = new DatosAGuardar();
+        switch (type)
+        {
+            case SaveType.HIGHSCORE:
+                {
+                    datos.puntuacionMaxima = data;
+                    break;
+                }
+            
+            default:
+                break;
+        }
+       
+
+        bf.Serialize(file, datos);
+
+        file.Close();
+    }
+
+    void Cargar()
+    {
+        if (File.Exists(rutaArchivo))
+        {
+            
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(rutaArchivo, FileMode.Open);
+
+            DatosAGuardar datos = (DatosAGuardar)bf.Deserialize(file);
+
+            //Loading highscore;
+             ScoreManager.sm.highScore = datos.puntuacionMaxima;
+             ScoreManager.sm.UpdateHighScore(datos.puntuacionMaxima);
+
+         
+            file.Close();
+        }
+        else
+        {
+            Debug.Log("Not loading");
+            
+        }
+    }
+
+
+      
+}
+
+[Serializable]
+class DatosAGuardar
+{
+    public int puntuacionMaxima;
+    public int lifes; //Todo implement lifes;
 }

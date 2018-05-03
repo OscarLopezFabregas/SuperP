@@ -11,8 +11,18 @@ public class ScoreManager : MonoBehaviour {
     public int currentScore = 0;
 
     public Text highScoreText;
-    public int highScore = 500;
+    private int _highScore = 0;
+    private int key = 0;
 
+    public int highScore
+    {
+        get { return _highScore ^ key; }
+        set
+        {
+            key = Random.Range(0, int.MaxValue);
+            _highScore = value ^ key;
+        }
+    }
 
     private void Awake()
     {
@@ -46,7 +56,16 @@ public class ScoreManager : MonoBehaviour {
          }
     }
 
-	void Update () {
-		
-	}
+    private void OnApplicationQuit()
+    {
+        if(currentScore> highScore)
+        {
+            GameManager.gm.Guardar(SaveType.HIGHSCORE, highScore);
+        }
+    }
+
+    public void UpdateHighScore(int data)
+    {
+        highScoreText.text = data.ToString();
+    }
 }
