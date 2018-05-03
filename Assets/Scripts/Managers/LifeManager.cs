@@ -21,7 +21,7 @@ public class LifeManager : MonoBehaviour {
 	// Update is called once per frame
 	public void UpdateLifes ()
     {
-        lifesText.text = lifes.ToString();
+        lifesText.text = "X " + lifes.ToString();
 	}
     public void AddLifes()
     {

@@ -34,7 +34,7 @@ TextureImporter:
     21300054: Life
     21300056: TimeStop
     21300058: TimeSlow
-    21300060: PangMobile_30
+    21300060: Life
     21300062: PangMobile_31
     21300064: Fruit1
     21300066: Fruit2
@@ -611,7 +611,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PangMobile_30
+      name: Life
       rect:
         serializedVersion: 2
         x: 244

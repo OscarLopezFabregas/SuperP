@@ -78,7 +78,6 @@ public class PowerUps : MonoBehaviour {
             else if(gameObject.name.Equals("Life"))
             {
                 lm.AddLifes();
-
             }
             Destroy(gameObject);
         }
