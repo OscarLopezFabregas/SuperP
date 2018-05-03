@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour {
 
     public GameObject powerUp;
 
+    bool speedChangedBall5;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -143,6 +145,26 @@ public class Ball : MonoBehaviour {
             Instantiate(powerUp, transform.position, Quaternion.identity);
         }
     }
+
+
+    //Consider extending to all balls
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("triggered");
+        if (collision.gameObject.tag == "Ground" && (gameObject.name == "Ball_5"|| gameObject.name == "Ball_5(Clone)")
+            && !speedChangedBall5)
+        {
+            Debug.Log("speed changed!");
+            if (rb.velocity.x > 0)
+                rb.velocity = new Vector2(2, 6);
+            else
+                rb.velocity = new Vector2(-2, 6);
+
+            speedChangedBall5 = true;
+        }
+    }
+     
+    
 
     //public IEnumerator WaitToBlink(params GameObject[] balls)
     //{

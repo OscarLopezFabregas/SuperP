@@ -85,6 +85,8 @@ TextureImporter:
     21300156: Fruit_8
     21300158: Fruit_9
     21300160: PangMobile_20
+    21300162: PangMobile_21
+    21300164: PangMobile_22
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -942,6 +944,34 @@ TextureImporter:
         height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PangMobile_21
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 18
+        width: 104
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PangMobile_22
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 3
+        width: 98
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

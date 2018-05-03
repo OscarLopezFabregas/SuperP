@@ -12,6 +12,10 @@ TextureImporter:
     21300010: Arcade - PANG 3 - Balloons_5
     21300012: Arcade - PANG 3 - Balloons_6
     21300014: Arcade - PANG 3 - Balloons_7
+    21300016: Arcade - PANG 3 - Balloons_8
+    21300018: Arcade - PANG 3 - Balloons_9
+    21300020: Arcade - PANG 3 - Balloons_10
+    21300022: Arcade - PANG 3 - Balloons_11
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -122,7 +126,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 78
+        y: 149
         width: 64
         height: 60
       alignment: 0
@@ -136,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 76
-        y: 78
+        y: 149
         width: 64
         height: 62
       alignment: 0
@@ -150,7 +154,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 161
-        y: 85
+        y: 156
         width: 48
         height: 47
       alignment: 0
@@ -164,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 230
-        y: 85
+        y: 156
         width: 48
         height: 45
       alignment: 0
@@ -178,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 71
         width: 65
         height: 66
       alignment: 0
@@ -192,7 +196,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 1
+        y: 72
         width: 63
         height: 64
       alignment: 0
@@ -206,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 142
-        y: 0
+        y: 71
         width: 65
         height: 66
       alignment: 0
@@ -220,7 +224,63 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 218
-        y: 5
+        y: 76
+        width: 66
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Arcade - PANG 3 - Balloons_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Arcade - PANG 3 - Balloons_9
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 3
+        width: 63
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Arcade - PANG 3 - Balloons_10
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 3
+        width: 65
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Arcade - PANG 3 - Balloons_11
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 9
         width: 66
         height: 58
       alignment: 0
