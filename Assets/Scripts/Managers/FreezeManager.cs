@@ -8,7 +8,7 @@ public class FreezeManager : MonoBehaviour {
 
     public Text freezeTimeText;
     public GameObject freezeTimeCount;
-    public float freezeTime = 3f;
+    float freezingTime;
     public bool freeze = false;
 
     private void Awake()
@@ -45,6 +45,7 @@ public class FreezeManager : MonoBehaviour {
     {
         BallManager.bm.ReloadList();
 
+        freezingTime += freezeTime;
 
         freeze = true;
 
@@ -102,6 +103,11 @@ public class FreezeManager : MonoBehaviour {
 
        
         freeze = false;
+        if(GameManager.gm.gameMode == GameMode.PANIC)
+        {
+            StartCoroutine(BallSpawn.bs.MoveDown());
+        }
+  
     }
 
  

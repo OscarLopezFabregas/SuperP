@@ -18,9 +18,14 @@ public class Ball : MonoBehaviour {
 
     public GameObject specialBall;
 
+    public Sprite[] sprites;
+    SpriteRenderer sr;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     
@@ -84,7 +89,7 @@ public class Ball : MonoBehaviour {
         }
 
         int score = Random.Range(100, 301);
-
+        
         PopUpManager.pop.InstantiatePopUpText(gameObject.transform.position, score);
 
         ScoreManager.sm.Updatescore(score);
@@ -172,8 +177,8 @@ public class Ball : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("triggered");
-        if (collision.gameObject.tag == "Ground" && (gameObject.name == "Ball_5"|| gameObject.name == "Ball_5(Clone)"
-            || gameObject.name == "SpecialBall")  && !speedChangedBall5)
+        if (collision.gameObject.tag == "Ground" && !speedChangedBall5 && (gameObject.name.Contains("Ball_5")
+            || gameObject.name.Contains("Special")))
         {
             Debug.Log("speed changed!");
             if (rb.velocity.x > 0)
@@ -182,6 +187,20 @@ public class Ball : MonoBehaviour {
                 rb.velocity = new Vector2(-2, 6);
 
             speedChangedBall5 = true;
+        }
+
+        if(collision.gameObject.tag == "Ground" 
+            && (gameObject.name.Contains("DestroyBall")|| gameObject.name.Contains("StopBall")))
+        {
+            if(sr.sprite == sprites[0])
+            {
+                sr.sprite = sprites[1];
+            }
+            else
+            {
+                sr.sprite = sprites[0];
+            }
+            gameObject.name = sr.sprite.name;
         }
     }
      

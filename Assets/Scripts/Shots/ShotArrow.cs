@@ -32,8 +32,14 @@ public class ShotArrow : MonoBehaviour {
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            
-        
+        if(collision.gameObject.name.Contains("DestroyBall"))
+        {
+            BallManager.bm.Dynamite(6);
+        }
+        if(collision.gameObject.name.Contains("StopBall"))
+        {
+            FreezeManager.fm.StartFreeze(6);
+        }
         if(collision.gameObject.tag == "Ball")
         {
             collision.gameObject.GetComponent<Ball>().Split();

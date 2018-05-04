@@ -7,11 +7,13 @@ public class Fruits : MonoBehaviour {
     	
     public void InstantiateFruit()
     {
-        Instantiate(fruitItem, transform.position, Quaternion.identity);
+        int fruitsInGame = GameObject.FindGameObjectsWithTag("Fruit").Length;
+
+        if(fruitsInGame == 0 )
+        {
+            Instantiate(fruitItem, transform.position, Quaternion.identity);
+        }
     }
 
-    void Update()
-    {
-
-    }
+    
 }

@@ -30,7 +30,7 @@ public class FrameController : MonoBehaviour {
     {
         time = GameManager.gm.time;
 
-        if(time<100 && !danger && GameManager.inGame)
+        if(time<10 && !danger && GameManager.inGame)
         {
             StartCoroutine(Danger());
         }

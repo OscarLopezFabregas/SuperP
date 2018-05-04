@@ -38,14 +38,15 @@ public class GameManager : MonoBehaviour {
     Fruits fruits;
     BackgroundController bc;
 
-    public Image progressBar;
-
+    Image progressBar;
+    Text levelText;
+    
     public int ballsDestroyed = 0;
     public int fruitsCaught;
 
     string rutaArchivo;
 
-    public Text levelText;
+    
     public int currentLevel = 1;
        
     private void Awake()
@@ -70,6 +71,9 @@ public class GameManager : MonoBehaviour {
         {
             Debug.Log("PanicModeON");
             gameMode = GameMode.PANIC;
+
+            progressBar = GameObject.FindGameObjectWithTag("Progress").GetComponent<Image>();
+            levelText = GameObject.FindGameObjectWithTag("Level").GetComponent<Text>();
         }
         else
         {
@@ -82,15 +86,16 @@ public class GameManager : MonoBehaviour {
     {
         Cargar();
         StartCoroutine(GameStart());
-
-        if(gameMode == GameMode.PANIC)
+        
+        if (gameMode == GameMode.PANIC)
         {
             progressBar.fillAmount = 0;
         }
-	}
-	
-	
-	void Update ()
+    }
+
+
+
+    void Update ()
     {
         if (gameMode == GameMode.TOUR)
         {
@@ -104,7 +109,7 @@ public class GameManager : MonoBehaviour {
                 panel.SetActive(true);
                 panelController = panel.GetComponent<PanelController>();
             }
-            if (inGame)
+            if (inGame && timeText!=null)
             {
                 time -= Time.deltaTime;
                 timeText.text = "TIME: " + time.ToString("f0");
@@ -169,6 +174,7 @@ public class GameManager : MonoBehaviour {
             {
                 progressBar.fillAmount = 0;
                 currentLevel++;
+                BallSpawn.bs.IncreaseDifficulty();
                 bc.BackgroundChange();
                 if(currentLevel<10)
                 {
@@ -190,7 +196,7 @@ public class GameManager : MonoBehaviour {
     public void Guardar(SaveType type, int data)
     {
         //Consider modifying this function so it can be called from everywhere in the game
-       // Debug.Log("Saving data: \n" + "highscore: " + data );
+        Debug.Log("Saving data: \n" + "highscore: " + data );
         
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(rutaArchivo);
@@ -218,7 +224,6 @@ public class GameManager : MonoBehaviour {
         if (File.Exists(rutaArchivo))
         {
             
-
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(rutaArchivo, FileMode.Open);
 

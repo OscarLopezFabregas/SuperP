@@ -14,6 +14,8 @@ public class BallSpawn : MonoBehaviour {
 
     public bool free;
 
+    float timeSpawn = 12f;
+
     private void Awake()
     {
         if(bs == null)
@@ -31,6 +33,14 @@ public class BallSpawn : MonoBehaviour {
         {
             free = true;
             ball.GetComponent<Ball>().StartForce(ball);
+            BallManager.bm.balls.Add(ball);
+            ball.gameObject.tag = "Ball";
+
+            if(ball.GetComponent<Ball>().sprites.Length>0)
+            {
+                ball.name = ball.GetComponent<SpriteRenderer>().name;
+            }
+            ball = null;
         }
         
     }
@@ -38,14 +48,14 @@ public class BallSpawn : MonoBehaviour {
     
     public void NewBall()
     {
-        if(!FreezeManager.fm.freeze) 
+        if(!FreezeManager.fm.freeze && ball == null) 
         {
             free = false;
             ball = Instantiate(ballsPrefab[Random.Range(0, ballsPrefab.Length)], 
                 new Vector2(AleatoryPosition(), transform.position.y), Quaternion.identity);
 
-            BallManager.bm.balls.Add(ball);
-
+     
+            ball.gameObject.tag = "Untagged";
             StartCoroutine(MoveDown());
         }
     }
@@ -55,23 +65,48 @@ public class BallSpawn : MonoBehaviour {
         return (Random.Range(-7.2f, 7.2f));
     }
 
+    public void IncreaseDifficulty()
+    {
+        if(timeSpawn>1)
+        {
+            timeSpawn -= 0.5f;
+        }
+       
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ball")
+        if(collision.gameObject.tag == "Untagged")
         {
             free = false;
         }
     }
 
-    IEnumerator MoveDown()
+    public IEnumerator MoveDown()
     {
-        yield return new WaitForSeconds(1);
-
-        while(!free)
+        if(ball != null)
         {
-            ball.transform.position = new Vector2(ball.transform.position.x, ball.transform.position.y - 0.5f);
-
             yield return new WaitForSeconds(1);
+
+            while (!free)
+            {
+                if(FreezeManager.fm.freeze)
+                {
+                    break;
+                }
+
+                ball.transform.position = new Vector2(ball.transform.position.x, ball.transform.position.y - 0.5f);
+
+                yield return new WaitForSeconds(1);
+            }
+
+            yield return new WaitForSeconds(timeSpawn);
+
+            if(free)
+            {
+                NewBall();
+            }
         }
+      
     }
 }

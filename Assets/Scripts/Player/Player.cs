@@ -106,6 +106,10 @@ public class Player : MonoBehaviour {
 
     private void OnBecameInvisible()
     {
+        if(lm.lifes<=0)
+        {
+            SceneManager.LoadScene("Map");
+        }
         Invoke("ReloadLevel", 0.5f); 
     }
 
