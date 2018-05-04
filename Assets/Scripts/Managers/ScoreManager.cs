@@ -66,6 +66,6 @@ public class ScoreManager : MonoBehaviour {
 
     public void UpdateHighScore(int data)
     {
-        highScoreText.text = data.ToString();
+        highScoreText.text ="HI - " + data.ToString();
     }
 }

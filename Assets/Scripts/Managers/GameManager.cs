@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour {
     LifeManager lm;
     Fruits fruits;
 
+    public Image progressBar;
+
     public int ballsDestroyed = 0;
     public int fruitsCaught;
 
@@ -75,6 +77,11 @@ public class GameManager : MonoBehaviour {
     {
         Cargar();
         StartCoroutine(GameStart());
+
+        if(gameMode == GameMode.PANIC)
+        {
+            progressBar.fillAmount = 0;
+        }
 	}
 	
 	
@@ -125,6 +132,7 @@ public class GameManager : MonoBehaviour {
    
     public IEnumerator GameStart()
     {
+        
         yield return new WaitForSeconds(2);
           
         ready.SetActive(false);
@@ -145,6 +153,18 @@ public class GameManager : MonoBehaviour {
     public int AleatoryNumber()
     {
         return UnityEngine.Random.Range(0, 3);
+    }
+
+    public void PanicProgress()
+    {
+        if(gameMode == GameMode.PANIC)
+        {
+            progressBar.fillAmount += 0.1f;
+            if(progressBar.fillAmount == 1)
+            {
+                progressBar.fill
+            }
+        }
     }
 
     public void NextLevel()

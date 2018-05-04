@@ -10,7 +10,7 @@ public class ShootManager : MonoBehaviour {
 
     public int maxShots;
     public int numberOfShots = 0;
-    public int typeOfShot; //0 - Arrow //1 - Double Arrow //2- Ancle //3- Laser
+    public int typeOfShot = 0; //0 - Arrow //1 - Double Arrow //2- Ancle //3- Laser
 
     Animator animator;
 
@@ -33,8 +33,16 @@ public class ShootManager : MonoBehaviour {
     
     private void Start()
     {
-        typeOfShot = 0;
-        maxShots = 1;
+        if(GameManager.gm.gameMode == GameMode.TOUR)
+        {
+            typeOfShot = 0;
+            maxShots = 1;
+        }
+        else
+        {
+            typeOfShot = 0;
+            ChangeShot(1);
+        }
     }
 
     private void Update()
@@ -87,7 +95,10 @@ public class ShootManager : MonoBehaviour {
 
     public void ChangeShot(int type)
     {
-        if(typeOfShot != type)
+        //Debug.Log("changing");
+        //Debug.Log("type:" + type);
+
+        if (typeOfShot != type)
         {
             switch(type)
             {

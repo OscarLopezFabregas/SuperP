@@ -24,10 +24,13 @@ public class Ball : MonoBehaviour {
     
     public void Split()
     {
-        if(nextBall!=null)
+        GameManager.gm.PanicProgress();
+        if (nextBall != null)
         {
-            InstantiatePrice();
-
+            if (GameManager.gm.gameMode == GameMode.TOUR)
+            {
+                InstantiatePrice();
+            }
             GameObject ball1 = Instantiate(nextBall, rb.position + Vector2.right / 4,
                 Quaternion.identity);
             ball1.GetComponent<Ball>().right = true;
