@@ -42,6 +42,10 @@ public class ShotArrow : MonoBehaviour {
         {
             collision.gameObject.GetComponent<Hexagon>().Split();
         }
+        if(collision.gameObject.name.Contains("Special"))
+        {
+            FreezeManager.fm.StartFreeze(1.5f);
+        }
 
         Destroy(gameObject);
         ShootManager.shm.DestroyShot();

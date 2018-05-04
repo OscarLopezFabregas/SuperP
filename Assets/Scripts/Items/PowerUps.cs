@@ -68,7 +68,7 @@ public class PowerUps : MonoBehaviour {
             }
             else if (gameObject.name.Equals("TimeStop"))
             {
-               FreezeManager.fm.StartFreeze();
+               FreezeManager.fm.StartFreeze(3f);
             }
             else if (gameObject.name.Equals("TimeSlow"))
             {

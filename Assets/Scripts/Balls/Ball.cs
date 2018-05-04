@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour {
 
     bool speedChangedBall5;
 
+    public GameObject specialBall;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +27,7 @@ public class Ball : MonoBehaviour {
     public void Split()
     {
         GameManager.gm.PanicProgress();
+
         if (nextBall != null)
         {
             if (GameManager.gm.gameMode == GameMode.TOUR)
@@ -34,9 +37,24 @@ public class Ball : MonoBehaviour {
             GameObject ball1 = Instantiate(nextBall, rb.position + Vector2.right / 4,
                 Quaternion.identity);
             ball1.GetComponent<Ball>().right = true;
-            GameObject ball2 = Instantiate(nextBall, rb.position + Vector2.left / 4,
-               Quaternion.identity);
-            ball2.GetComponent<Ball>().right = false;
+            GameObject ball2 = null;
+            if (GameManager.gm.gameMode == GameMode.PANIC && specialBall!=null)
+            {
+
+                ball2 = Instantiate(specialBall, rb.position + Vector2.left / 4,
+                Quaternion.identity);
+                ball2.GetComponent<Ball>().right = false;
+
+
+            }
+            else
+            {
+                ball2 = Instantiate(nextBall, rb.position + Vector2.left / 4,
+                Quaternion.identity);
+                ball2.GetComponent<Ball>().right = false;
+
+            }
+
             if (FreezeManager.fm.freeze == false)
             {
                 BallManager.bm.DestroyBall(gameObject, ball1, ball2);
@@ -154,8 +172,8 @@ public class Ball : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("triggered");
-        if (collision.gameObject.tag == "Ground" && (gameObject.name == "Ball_5"|| gameObject.name == "Ball_5(Clone)")
-            && !speedChangedBall5)
+        if (collision.gameObject.tag == "Ground" && (gameObject.name == "Ball_5"|| gameObject.name == "Ball_5(Clone)"
+            || gameObject.name == "SpecialBall")  && !speedChangedBall5)
         {
             Debug.Log("speed changed!");
             if (rb.velocity.x > 0)

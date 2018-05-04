@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
     LifeManager lm;
     Fruits fruits;
+    BackgroundController bc;
 
     public Image progressBar;
 
@@ -43,6 +44,9 @@ public class GameManager : MonoBehaviour {
     public int fruitsCaught;
 
     string rutaArchivo;
+
+    public Text levelText;
+    public int currentLevel = 1;
        
     private void Awake()
     {
@@ -60,6 +64,7 @@ public class GameManager : MonoBehaviour {
         player = FindObjectOfType<Player>();
         lm = FindObjectOfType<LifeManager>();
         fruits = FindObjectOfType<Fruits>();
+        bc = FindObjectOfType<BackgroundController>();
 
         if(SceneManager.GetActiveScene().name.Equals("PanicMode"))
         {
@@ -162,7 +167,17 @@ public class GameManager : MonoBehaviour {
             progressBar.fillAmount += 0.1f;
             if(progressBar.fillAmount == 1)
             {
-                progressBar.fill
+                progressBar.fillAmount = 0;
+                currentLevel++;
+                bc.BackgroundChange();
+                if(currentLevel<10)
+                {
+                    levelText.text = "Lv.0" + currentLevel.ToString();
+                }
+                else
+                {
+                    levelText.text = "Lv." + currentLevel.ToString();
+                }
             }
         }
     }

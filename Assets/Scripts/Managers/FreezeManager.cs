@@ -33,19 +33,18 @@ public class FreezeManager : MonoBehaviour {
 		
 	}
 
-    public void StartFreeze()
+    public void StartFreeze(float freezeTime)
     {
         if(!freeze)
         {
-           StartCoroutine(FreezeTime());
+           StartCoroutine(FreezeTime(freezeTime));
         }
     }
 
-    public IEnumerator FreezeTime()
+    public IEnumerator FreezeTime(float freezeTime)
     {
         BallManager.bm.ReloadList();
 
-        freezeTime = 3f;
 
         freeze = true;
 
