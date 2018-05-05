@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour {
 
     public GameObject powerUp;
 
-    bool speedChangedBall5;
+    bool speedChangedBall;
 
     public GameObject specialBall;
 
@@ -176,17 +176,36 @@ public class Ball : MonoBehaviour {
     //Consider extending to all balls
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("triggered");
-        if (collision.gameObject.tag == "Ground" && !speedChangedBall5 && (gameObject.name.Contains("Ball_5")
-            || gameObject.name.Contains("Special")))
+        if ((collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform") && !speedChangedBall) 
         {
-            Debug.Log("speed changed!");
-            if (rb.velocity.x > 0)
-                rb.velocity = new Vector2(2, 6);
-            else
-                rb.velocity = new Vector2(-2, 6);
+            if(gameObject.name.Contains("Ball_5") || gameObject.name.Contains("Special"))
+            {
+                if (rb.velocity.x > 0)
+                    rb.velocity = new Vector2(2, 6);
+                else
+                    rb.velocity = new Vector2(-2, 6);
 
-            speedChangedBall5 = true;
+                speedChangedBall = true;
+            }
+            if (gameObject.name.Contains("Ball_4"))
+            {
+                if (rb.velocity.x > 0)
+                    rb.velocity = new Vector2(2, 7);
+                else
+                    rb.velocity = new Vector2(-2, 7);
+
+                speedChangedBall = true;
+            }
+            if (gameObject.name.Contains("Ball_3"))
+            {
+                if (rb.velocity.x > 0)
+                    rb.velocity = new Vector2(2, 8);
+                else
+                    rb.velocity = new Vector2(-2, 8);
+
+                speedChangedBall = true;
+            }
+
         }
 
         if(collision.gameObject.tag == "Ground" 

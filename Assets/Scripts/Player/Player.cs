@@ -4,11 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
-    public float speed = 4f;
+    public float speedX = 4f;
+    public float speedY = 4f;
 
-    float movement = 0f;
-
+    public float movementX = 0f;
+    float movementY = 0f;
+    
+    //climb
+    float maxClimbY = 0f;
+    public bool climb;
+    float defaultPosY;
+    public bool inGround;
+    public bool isUp;
+    float fallingSpeed = 5f;
     float newX;
+    float newY;
+    bool newPosition;
 
     Rigidbody2D rb;
 
@@ -39,6 +50,10 @@ public class Player : MonoBehaviour {
     {
         rightWall = false;
         leftWall = false;
+
+        lm.RestartLifesDoll();
+
+        defaultPosY = transform.position.y;
     }
 	
 	
@@ -46,10 +61,14 @@ public class Player : MonoBehaviour {
     {
         if(GameManager.inGame)
         {
-            movement = Input.GetAxisRaw("Horizontal") * speed;
-            animator.SetInteger("velX", Mathf.RoundToInt(movement));
+           // Debug.Log(movementX);
+            movementX = Input.GetAxisRaw("Horizontal") * speedX;
+            animator.SetInteger("velX", Mathf.RoundToInt(movementX));
 
-            if (movement < 0)
+            movementY = Input.GetAxisRaw("Vertical") * speedY;
+            animator.SetInteger("velY", Mathf.RoundToInt(movementY));
+
+            if (movementX < 0)
             {
                 sr.flipX = true;
             }
@@ -65,15 +84,16 @@ public class Player : MonoBehaviour {
     {
         if (GameManager.inGame)
         {
+            //walls constrains
             if (leftWall)
             {
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    speed = 0f;
+                    speedX = 0f;
                 }
                 else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
                 {
-                    speed = 4f;
+                    speedX = 4f;
                 }
             }
             if (rightWall)
@@ -81,20 +101,64 @@ public class Player : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    speed = 0f;
+                    speedX = 0f;
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
                 {
-                    speed = 4f;
+                    speedX = 4f;
                 }
             }
+            
+            
+            //---
 
+            //climbing
+            if(transform.position.y >= maxClimbY)
+            {
+                isUp = true;
+            }
+            else
+            {
+                isUp = false;
+            }
 
-            rb.MovePosition(rb.position + Vector2.right * movement * Time.fixedDeltaTime);
+            if(climb)
+            {
+                if((Input.GetKey(KeyCode.UpArrow) && !isUp) 
+                    || (Input.GetKey(KeyCode.DownArrow) && !inGround))
+                {
+                    speedY = 4f;
+                }
+                else
+                {
+                    speedY = 0;
+                }
+            }
+            else
+            {
+                speedY = 0;
+            }
+            if(movementX!= 0)
+            {
+               // Debug.Log("Moving");
+                rb.MovePosition(rb.position + Vector2.right * movementX * Time.fixedDeltaTime);
+            }
+           else if((transform.position.y >= defaultPosY && climb && !isUp)
+                || (isUp && Input.GetKey(KeyCode.DownArrow)))
+           {
+                rb.MovePosition(rb.position + Vector2.up * movementY * Time.fixedDeltaTime);
+            }
 
-            newX = Mathf.Clamp(transform.position.x, -8f, 8f);
+            //newX = Mathf.Clamp(transform.position.x, -8f, 8f);
+            //transform.position = new Vector2(newX, transform.position.y);
 
-            transform.position = new Vector2(newX, transform.position.y);
+            newY = Mathf.Clamp(transform.position.y, -2.31f, 8f);
+            transform.position = new Vector2(transform.position.x, newY);
+
+            if(!inGround && !climb)
+            {
+                transform.position += new Vector3(movementX / 5, -1) * Time.deltaTime * fallingSpeed;
+            }
         }     
     }
 
@@ -108,9 +172,12 @@ public class Player : MonoBehaviour {
     {
         if(lm.lifes<=0)
         {
-            SceneManager.LoadScene("Map");
+            GameManager.gm.GameOver();
         }
-        Invoke("ReloadLevel", 0.5f); 
+        else
+        {
+            Invoke("ReloadLevel", 0.5f);
+        }
     }
 
     void ReloadLevel()
@@ -143,16 +210,30 @@ public class Player : MonoBehaviour {
                 }
             }
         }
-            if (!GameManager.inGame && (collision.gameObject.tag == "Right"
-                || collision.gameObject.tag == "Left"))
-            {
-                sr.flipX = !sr.flipX;
-                rb.velocity /= 3f;
-                rb.velocity *= -1f;
-                rb.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
-            }
+        if (!GameManager.inGame && (collision.gameObject.tag == "Right"
+            || collision.gameObject.tag == "Left"))
+        {
+            sr.flipX = !sr.flipX;
+            rb.velocity /= 3f;
+            rb.velocity *= -1f;
+            rb.AddForce(Vector3.up * 5, ForceMode2D.Impulse);
+        }
         
-       
+       if(GameManager.inGame && collision.gameObject.tag == "Ladder")
+        {
+            if(!isUp)
+            {
+                maxClimbY = transform.position.y + collision.GetComponent<BoxCollider2D>().size.y - 0.1f;
+            }
+                   
+        }
+       if(GameManager.inGame && collision.gameObject.name.Contains("Platform")
+            && transform.position.y + 0.3f < collision.gameObject.transform.position.y && inGround)
+        {
+            Debug.Log("trigger entered");
+            transform.position = new Vector3(transform.position.x, collision.gameObject.transform.position.y);
+            
+        }
        
     }
 
@@ -168,8 +249,27 @@ public class Player : MonoBehaviour {
             
             rightWall = true;
         }
+
+        if(collision.gameObject.tag == "Ladder")
+        {
+            climb = true;
+        }
+      
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform")
+        //&& transform.position.y >= collision.gameObject.transform.position.y - 0.05f)
+        {
+            inGround = true;
+            if (collision.gameObject.tag == "Platform"
+                 && transform.position.y < collision.gameObject.transform.position.y)
+            {
+                transform.position = new Vector3(transform.position.x, collision.gameObject.transform.position.y);
+              
+            }
+        }
+      
     }
 
+  
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Left")
@@ -179,6 +279,16 @@ public class Player : MonoBehaviour {
         else if (collision.gameObject.tag == "Right")
         {
             rightWall = false;
+        }
+
+        if(collision.gameObject.tag == "Ladder")
+        {
+            climb = false;
+        }
+
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform")
+        {
+            inGround = false;
         }
     }
    

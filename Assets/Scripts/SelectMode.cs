@@ -16,7 +16,15 @@ public class SelectMode : MonoBehaviour {
     {
         tour = true;
         yellowAlpha = new Color(1f, 1f, 0f, 0.5f);
-	}
+
+
+        GameObject dontDestroy = FindObjectOfType<DontDestroy>().gameObject;
+
+        if (dontDestroy != null)
+        {
+            Destroy(dontDestroy);
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -41,10 +49,12 @@ public class SelectMode : MonoBehaviour {
     public void TourModeClicked()
     {
         tour = true;
+        GameManager.gm.gameMode = GameMode.TOUR;
     }
     public void PanicModeClicked()
     {
         tour = false;
+        GameManager.gm.gameMode = GameMode.PANIC;
     }
 
     public void LoadSceneMode()

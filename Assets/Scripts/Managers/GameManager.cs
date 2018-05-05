@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
     public static bool inGame;
 
     public GameObject ready;
+    public GameObject gameOver;
 
     public GameMode gameMode;
 
@@ -81,9 +82,12 @@ public class GameManager : MonoBehaviour {
         }
     }
     
+    
 	
 	void Start ()
     {
+        gameOver.SetActive(false);
+
         Cargar();
         StartCoroutine(GameStart());
         
@@ -118,7 +122,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-           
+
             if (BallManager.bm.balls.Count == 0
              && HexagonManager.hm.hexagons.Count == 0
              && BallSpawn.bs.free)
@@ -160,6 +164,11 @@ public class GameManager : MonoBehaviour {
         GameManager.inGame = true;
     }
 
+    public void GameOver()
+    {
+        StartCoroutine(GameIsOver());
+    }
+
     public int AleatoryNumber()
     {
         return UnityEngine.Random.Range(0, 3);
@@ -191,6 +200,15 @@ public class GameManager : MonoBehaviour {
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public IEnumerator GameIsOver()
+    {
+        gameOver.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadScene("Map");
     }
 
     public void Guardar(SaveType type, int data)

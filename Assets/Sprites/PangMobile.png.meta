@@ -938,9 +938,9 @@ TextureImporter:
       name: PangMobile_20
       rect:
         serializedVersion: 2
-        x: 345
-        y: 119
-        width: 19
+        x: 343
+        y: 125
+        width: 20
         height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -957,7 +957,7 @@ TextureImporter:
         width: 104
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -971,7 +971,7 @@ TextureImporter:
         width: 98
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

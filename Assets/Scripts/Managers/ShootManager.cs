@@ -29,6 +29,7 @@ public class ShootManager : MonoBehaviour {
 
         player = FindObjectOfType<Player>().transform;
         shotImage = FindObjectOfType<CurrentShotImage>();
+        animator = player.GetComponent<Animator>();
     }
     
     private void Start()
@@ -56,11 +57,15 @@ public class ShootManager : MonoBehaviour {
         {
             numberOfShots = 0;
         }
+        if(animator.GetBool("shoot") && player.GetComponent<Player>().movementX != 0)
+        {
+            animator.SetBool("shoot", false);
+        }
 
     }
     bool CanShot()
     {
-        if(numberOfShots < maxShots)
+        if(numberOfShots < maxShots && GameManager.inGame)
         {
             return true;
         }
@@ -68,7 +73,12 @@ public class ShootManager : MonoBehaviour {
         return false;
     }
     void Shot()
-    {   if(typeOfShot != 3)
+    {
+        if(player.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+        {
+            animator.SetTrigger("shoot");
+        }
+        if (typeOfShot != 3)
         {
             Instantiate(Shots[typeOfShot], player.position, Quaternion.identity);
         }
