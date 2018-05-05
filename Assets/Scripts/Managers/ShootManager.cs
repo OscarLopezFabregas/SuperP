@@ -48,7 +48,7 @@ public class ShootManager : MonoBehaviour {
 
     private void Update()
     {
-        if(CanShot() && Input.GetKeyDown(KeyCode.X))
+        if(CanShot() && (Input.GetKeyDown(KeyCode.X) || Buttons.shotButton))
         {
             Shot();
         }

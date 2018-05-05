@@ -8,7 +8,9 @@ public class Player : MonoBehaviour {
     public float speedY = 4f;
 
     public float movementX = 0f;
+    public float horizontal = 0f;
     float movementY = 0f;
+
     
     //climb
     float maxClimbY = 0f;
@@ -61,8 +63,9 @@ public class Player : MonoBehaviour {
     {
         if(GameManager.inGame)
         {
-           // Debug.Log(movementX);
-            movementX = Input.GetAxisRaw("Horizontal") * speedX;
+            // Debug.Log(movementX);
+            movementX = horizontal * speedX;
+            //movementX = Input.GetAxisRaw("Horizontal") * speedX;
             animator.SetInteger("velX", Mathf.RoundToInt(movementX));
 
             movementY = Input.GetAxisRaw("Vertical") * speedY;
@@ -87,23 +90,25 @@ public class Player : MonoBehaviour {
             //walls constrains
             if (leftWall)
             {
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (Input.GetKey(KeyCode.LeftArrow) || horizontal == -1)
                 {
                     speedX = 0f;
                 }
-                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)
+                    ||horizontal != 0)
                 {
                     speedX = 4f;
                 }
             }
-            if (rightWall)
+            if (rightWall )
             {
 
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (Input.GetKey(KeyCode.RightArrow) || horizontal == 1)
                 {
                     speedX = 0f;
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)
+                   || horizontal != 0)
                 {
                     speedX = 4f;
                 }
