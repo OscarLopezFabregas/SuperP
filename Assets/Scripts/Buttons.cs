@@ -22,7 +22,7 @@ public class Buttons : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             player.horizontal = -1;
         }
-        else if (gameObject.name.Equals("Shot"))
+        else if (gameObject.name.Equals("Shot") && shotButton == false)
         {
             shotButton = true;
         }

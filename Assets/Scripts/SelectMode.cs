@@ -65,7 +65,7 @@ public class SelectMode : MonoBehaviour {
         }
         else
         {
-            SceneManager.LoadScene("Panic");
+            SceneManager.LoadScene("PanicMode");
         }
     }
 }

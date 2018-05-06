@@ -66,9 +66,9 @@ public class Hexagon : MonoBehaviour {
             if (FreezeManager.fm.freeze == false)
             {
                 hex1.GetComponent<Hexagon>().forceX = forceX;
-                hex1.GetComponent<Hexagon>().forceY = forceY;
+                hex1.GetComponent<Hexagon>().forceY = 4f;
                 hex2.GetComponent<Hexagon>().forceX = -forceX;
-                hex2.GetComponent<Hexagon>().forceY = forceY;
+                hex2.GetComponent<Hexagon>().forceY = 4f;
 
                 HexagonManager.hm.DestroyHexagon(gameObject, hex1, hex2);
             }
@@ -205,13 +205,20 @@ public class Hexagon : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground"|| collision.gameObject.tag == "Roof")
+        Debug.Log("collision!!");
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Roof" 
+            || collision.gameObject.tag == "Platform" || collision.gameObject.tag == "Destroyable")
         {
             forceY *= -1;
         }
         if (collision.gameObject.tag == "Left" || collision.gameObject.tag == "Right")
+        {
+            forceX *= -1;
+        }
+        if(collision.gameObject.tag == "Hexagon")
         {
             forceX *= -1;
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestroyableObjects : MonoBehaviour {
     Animator animator;
+    public GameObject powerUp;
 	// Use this for initialization
 	void Start () {
 
@@ -32,6 +33,7 @@ public class DestroyableObjects : MonoBehaviour {
     {
         animator.SetTrigger("destroy");
         yield return new WaitForSeconds(0.15f);
+        Instantiate(powerUp, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

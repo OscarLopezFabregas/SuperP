@@ -20,6 +20,8 @@ public class PanelController : MonoBehaviour
 
     public Text gameScore;
 
+    public string sceneToLoad;
+
     private void OnEnable()
     {
         balls = GameManager.gm.ballsDestroyed;
@@ -80,7 +82,7 @@ public class PanelController : MonoBehaviour
         //Change to map
         if(SceneManager.sceneCountInBuildSettings > SceneManager.GetActiveScene().buildIndex + 1)
         {
-            GameManager.gm.NextLevel();
+            GameManager.gm.NextLevel(sceneToLoad);
         }
 
     }

@@ -31,8 +31,8 @@ public class PressStart : MonoBehaviour {
         }
     }
 
-    public void LoadScene()
+    public void LoadScene(string sceneToLoad)
     {
-        SceneManager.LoadScene("selectMode");
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

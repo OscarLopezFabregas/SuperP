@@ -45,15 +45,15 @@ public class GameManager : MonoBehaviour {
     public int ballsDestroyed = 0;
     public int fruitsCaught;
 
-    string rutaArchivo;
+    static string rutaArchivo;
 
-    
+    AudioSource audioSource;
     public int currentLevel = 1;
        
     private void Awake()
     {
         rutaArchivo = Application.persistentDataPath + "/datos.dat";
-
+        audioSource = GetComponent<AudioSource>();
         if (gm==null)
         {
             gm = this;
@@ -95,8 +95,13 @@ public class GameManager : MonoBehaviour {
         {
             progressBar.fillAmount = 0;
         }
+
     }
 
+    void PlayMusic()
+    {
+        audioSource.Play();
+    }
 
 
     void Update ()
@@ -154,6 +159,11 @@ public class GameManager : MonoBehaviour {
         {
             BallManager.bm.StartGame();
             HexagonManager.hm.StartGame();
+            if(audioSource != null)
+            {
+                audioSource.Play();
+            }
+           
         }
         else
         {
@@ -197,9 +207,9 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void NextLevel()
+    public void NextLevel(string sceneToLoad)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     public IEnumerator GameIsOver()

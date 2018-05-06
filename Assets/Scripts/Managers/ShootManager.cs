@@ -50,6 +50,7 @@ public class ShootManager : MonoBehaviour {
     {
         if(CanShot() && (Input.GetKeyDown(KeyCode.X) || Buttons.shotButton))
         {
+            Buttons.shotButton = false;
             Shot();
         }
         if( numberOfShots == maxShots && GameObject.FindGameObjectsWithTag("Arrow").Length == 0
