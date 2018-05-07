@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
        
     private void Awake()
     {
-        rutaArchivo = Application.persistentDataPath + "/datos.dat";
+        rutaArchivo = Application.dataPath + "/datos.dat";
         audioSource = GetComponent<AudioSource>();
         if (gm==null)
         {
@@ -260,7 +260,6 @@ public class GameManager : MonoBehaviour {
             //Loading highscore;
              ScoreManager.sm.highScore = datos.puntuacionMaxima;
              ScoreManager.sm.UpdateHighScore(datos.puntuacionMaxima);
-
          
             file.Close();
         }

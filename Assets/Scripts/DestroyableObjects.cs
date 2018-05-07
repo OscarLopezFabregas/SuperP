@@ -32,7 +32,7 @@ public class DestroyableObjects : MonoBehaviour {
     IEnumerator DestroyObject()
     {
         animator.SetTrigger("destroy");
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.25f);
         Instantiate(powerUp, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

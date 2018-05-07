@@ -8,6 +8,7 @@ public class PressStart : MonoBehaviour {
     Color transparent;
     private void Start()
     {
+        
         GameObject dontDestroy = FindObjectOfType<DontDestroy>().gameObject;
 
         if(dontDestroy!= null)
