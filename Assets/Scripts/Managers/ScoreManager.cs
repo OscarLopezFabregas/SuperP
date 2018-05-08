@@ -42,6 +42,7 @@ public class ScoreManager : MonoBehaviour {
     {
         currentScore = 0;
         scoreText.text = currentScore.ToString();
+        UpdateHighScore(GameStatus.gs.gameHighScore);
 	}
 	
 	public void Updatescore(int score)
@@ -61,10 +62,12 @@ public class ScoreManager : MonoBehaviour {
         Debug.Log("On app quit do:");
         Debug.Log(currentScore);
         Debug.Log(highScore);
-        if(currentScore >= highScore && currentScore!=0)
+        if(currentScore >= GameStatus.gs.gameHighScore && currentScore!=0)
         {
-           // Debug.Log("current score > highscore");
-            GameManager.gm.Guardar(SaveType.HIGHSCORE, highScore);
+            ScoreManager.sm.highScore = currentScore;
+            GameStatus.gs.gameHighScore = ScoreManager.sm.highScore;
+            // Debug.Log("current score > highscore");
+            GameStatus.gs.GuardarHighScore();
         }
     }
 

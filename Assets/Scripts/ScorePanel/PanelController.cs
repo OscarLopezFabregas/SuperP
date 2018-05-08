@@ -77,10 +77,12 @@ public class PanelController : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        if(ScoreManager.sm.currentScore > ScoreManager.sm.highScore)
+        if(ScoreManager.sm.currentScore > GameStatus.gs.gameHighScore)
         {
             Debug.Log("Saving...");
-            GameManager.gm.Guardar(SaveType.HIGHSCORE, ScoreManager.sm.highScore);
+            ScoreManager.sm.highScore = ScoreManager.sm.currentScore;
+            GameStatus.gs.GuardarHighScore();
+        
         }
 
         //Change to map
