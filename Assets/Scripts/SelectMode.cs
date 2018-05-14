@@ -17,7 +17,7 @@ public class SelectMode : MonoBehaviour {
         tour = true;
         yellowAlpha = new Color(1f, 1f, 0f, 0.5f);
 
-
+        
         GameObject dontDestroy = FindObjectOfType<DontDestroy>().gameObject;
 
         if (dontDestroy != null)

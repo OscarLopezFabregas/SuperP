@@ -37,7 +37,9 @@ public class GameStatus : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        rutaArchivo = Application.persistentDataPath + "/datos.dat";
+
+        //check directoryseparatorchar
+        rutaArchivo = Application.persistentDataPath +  "/datos.dat"; //Path.DirectorySeparatorChar +
         Debug.Log(rutaArchivo);
         Debug.Log(File.Exists(rutaArchivo));
         
@@ -51,7 +53,7 @@ public class GameStatus : MonoBehaviour {
 		
 	}
 
-    public void GuardarHighScore()
+      public void GuardarHighScore(int gameHighScore) 
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(rutaArchivo);
@@ -117,7 +119,14 @@ public class GameStatus : MonoBehaviour {
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        GuardarHighScore(gameHighScore);
+    }
+
 }
+
+
 
 [Serializable]
 class DatosAGuardar

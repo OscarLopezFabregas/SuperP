@@ -138,6 +138,7 @@ public class Player : MonoBehaviour {
                 {
                     speedY = 0;
                 }
+               
             }
             else
             {

@@ -81,7 +81,7 @@ public class PanelController : MonoBehaviour
         {
             Debug.Log("Saving...");
             ScoreManager.sm.highScore = ScoreManager.sm.currentScore;
-            GameStatus.gs.GuardarHighScore();
+            GameStatus.gs.GuardarHighScore(ScoreManager.sm.highScore);
         
         }
 

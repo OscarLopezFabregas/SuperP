@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour {
         currentScore += score;
         scoreText.text = currentScore.ToString();
 
-        if(currentScore > highScore)
+        if(currentScore > GameStatus.gs.gameHighScore)
         {
             highScore = currentScore;
             highScoreText.text = "HI - " + highScore.ToString();
@@ -64,10 +64,10 @@ public class ScoreManager : MonoBehaviour {
         Debug.Log(highScore);
         if(currentScore >= GameStatus.gs.gameHighScore && currentScore!=0)
         {
-            ScoreManager.sm.highScore = currentScore;
-            GameStatus.gs.gameHighScore = ScoreManager.sm.highScore;
+            highScore = currentScore;
+            GameStatus.gs.gameHighScore = highScore;
             // Debug.Log("current score > highscore");
-            GameStatus.gs.GuardarHighScore();
+            GameStatus.gs.GuardarHighScore(highScore);
         }
     }
 
