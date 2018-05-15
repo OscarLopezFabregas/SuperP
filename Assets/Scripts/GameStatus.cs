@@ -50,10 +50,20 @@ public class GameStatus : MonoBehaviour {
         Cargar();
 
         ((PlayGamesPlatform)Social.Active).Authenticate((bool success) => { }, true);
+
+        //string[] testDeviceIDs = new string[] { "E92E9A6745B85439C2EA180AB0010A87" };
+       // EasyGoogleMobileAds.GetInterstitialManager().SetTestDevices(true, testDeviceIDs);
+
+        //Add for testing
+        EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-3940256099942544/1033173712");
+
+        //Comercial Add
+        EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-4618159390638701/1273555085");
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
