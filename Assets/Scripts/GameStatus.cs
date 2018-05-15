@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public enum SaveType
 {
@@ -27,6 +29,8 @@ public class GameStatus : MonoBehaviour {
         {
             gs = this;
             DontDestroyOnLoad(gameObject);
+           // PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.Activate();
         }
         else if (gs != this)
         {
@@ -45,7 +49,7 @@ public class GameStatus : MonoBehaviour {
         
         Cargar();
 
-
+        ((PlayGamesPlatform)Social.Active).Authenticate((bool success) => { }, true);
     }
 	
 	// Update is called once per frame

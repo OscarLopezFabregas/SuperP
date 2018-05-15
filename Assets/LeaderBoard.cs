@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using GooglePlayGames;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private Image button;
+
+    private void Awake()
+    {
+        button = GetComponentInChildren<Image>();
+    }
+
+    // Use this for initialization
+    void Start () {
+
+        button.color = Social.localUser.authenticated ? Color.white : Color.grey;
+    }
 	
 	// Update is called once per frame
 	void Update () {

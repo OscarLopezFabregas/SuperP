@@ -82,11 +82,13 @@ public class PanelController : MonoBehaviour
             Debug.Log("Saving...");
             ScoreManager.sm.highScore = ScoreManager.sm.currentScore;
             GameStatus.gs.GuardarHighScore(ScoreManager.sm.highScore);
-        
+            Social.ReportScore(ScoreManager.sm.highScore, "CgkItby8-JQLEAIQAQ", (bool success) => { });
+
+
         }
 
         //Change to map
-        if(SceneManager.sceneCountInBuildSettings > SceneManager.GetActiveScene().buildIndex + 1)
+        if (SceneManager.sceneCountInBuildSettings > SceneManager.GetActiveScene().buildIndex + 1)
         {
             GameManager.gm.NextLevel(sceneToLoad);
         }

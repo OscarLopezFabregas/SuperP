@@ -68,6 +68,8 @@ public class ScoreManager : MonoBehaviour {
             GameStatus.gs.gameHighScore = highScore;
             // Debug.Log("current score > highscore");
             GameStatus.gs.GuardarHighScore(highScore);
+            Social.ReportScore(ScoreManager.sm.highScore, "CgkItby8-JQLEAIQAQ", (bool success) => { });
+
         }
     }
 

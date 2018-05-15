@@ -208,7 +208,14 @@ public class GameManager : MonoBehaviour
     public IEnumerator GameIsOver()
     {
         gameOver.SetActive(true);
-
+        if (ScoreManager.sm.currentScore >= GameStatus.gs.gameHighScore && ScoreManager.sm.currentScore != 0)
+        {
+            ScoreManager.sm.highScore = ScoreManager.sm.currentScore;
+            GameStatus.gs.gameHighScore = ScoreManager.sm.highScore;
+            // Debug.Log("current score > highscore");
+            GameStatus.gs.GuardarHighScore(ScoreManager.sm.highScore);
+            Social.ReportScore(ScoreManager.sm.highScore, "CgkItby8-JQLEAIQAQ", (bool success) => { });
+        }
         yield return new WaitForSeconds(1.5f);
 
         SceneManager.LoadScene("Map");
