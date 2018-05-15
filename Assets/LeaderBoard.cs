@@ -7,25 +7,24 @@ using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour {
 
-    private Image button;
+    Button button;
 
     private void Awake()
     {
-        button = GetComponentInChildren<Image>();
+        button = GetComponent<Button>();
     }
 
     // Use this for initialization
     void Start () {
 
-        button.color = Social.localUser.authenticated ? Color.white : Color.grey;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        button.interactable = Social.localUser.authenticated ? true : false;
+    }
 
-    private void OnMouseDown()
+    public void ShowLeaderScore()
     {
         if(Social.localUser.authenticated)
         {
