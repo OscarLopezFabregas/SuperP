@@ -55,10 +55,10 @@ public class GameStatus : MonoBehaviour {
        // EasyGoogleMobileAds.GetInterstitialManager().SetTestDevices(true, testDeviceIDs);
 
         //Add for testing
-        EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-3940256099942544/1033173712");
+        //EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-3940256099942544/1033173712");
 
         //Comercial Add
-        EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-4618159390638701/1273555085");
+        //EasyGoogleMobileAds.GetInterstitialManager().PrepareInterstitial("ca-app-pub-4618159390638701/1273555085");
 
     }
 

@@ -90,7 +90,6 @@ public class PanelController : MonoBehaviour
         //Change to map
         if (SceneManager.sceneCountInBuildSettings > SceneManager.GetActiveScene().buildIndex + 1)
         {
-            EasyGoogleMobileAds.GetInterstitialManager().ShowInterstitial();
             GameManager.gm.NextLevel(sceneToLoad);
         }
 

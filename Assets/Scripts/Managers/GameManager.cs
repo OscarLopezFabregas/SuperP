@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
 
-        EasyGoogleMobileAds.GetInterstitialManager().ShowInterstitial();
+        //EasyGoogleMobileAds.GetInterstitialManager().ShowInterstitial();
         SceneManager.LoadScene("Map");
     }
 
